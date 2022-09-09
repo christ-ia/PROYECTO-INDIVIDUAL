@@ -1,0 +1,25 @@
+.h2-logo{
+    color: white;
+    font-weight: 400;
+    span{
+      font-weight: bold;
+      margin-right: 3rem;
+    }
+  }
+  .nav-bar{
+      padding: .4rem;
+      background-color: #333;
+      display: flex;
+      align-items: center;
+      //justify-content: space-between;
+  }
+  .link{
+    color: rgb(156, 141, 141);
+    text-decoration: none;
+    margin-right: 1rem;
+  }
+  .link-active{
+    color: whitesmoke;
+    text-decoration: none;
+    margin-right: 1rem;
+  }
