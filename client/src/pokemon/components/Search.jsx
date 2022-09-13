@@ -1,9 +1,15 @@
+import { useEffect } from "react";
 import { useState } from "react"
 
 
-export const Search = () => {
+export const Search = ({pokemons, setPokemons}) => {
   
   const [input, setInput] = useState('');
+
+  
+  //if (input == '') setPokemons([...pokemons])
+
+  
 
   const onChangeInput = (e)=>{
     setInput(e.target.value)
@@ -11,6 +17,8 @@ export const Search = () => {
 
   const onSubmit = (e)=>{
     e.preventDefault()
+    let searchPokemons = [...pokemons]
+    setPokemons( searchPokemons.filter(el => el.name === input) );
   }
 
   return (

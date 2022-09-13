@@ -5,7 +5,7 @@
 
 $colorsMap: (
     bug: #26de81,
-    dragon: #ffeaa7,
+    dragon: rgb(180, 43, 107),
     electric: #fed330,
     fairy: #FF0069,
     fighting: #30336b,
@@ -30,20 +30,21 @@ $colorsMap: (
     grid-template-columns: 23.5% 23.5% 23.5% 23.5%;
     width: 85%;
     justify-content: space-between;
-
     margin: 0 auto;
 }
-
 
 .container__card-container{
     width: 100%;
     transform: translate(50% 50%);
     margin-bottom: 20px;
 }
+.container__card-container:hover{
+    transform: translateY(-6px);
+}
 
 @each $name, $value in $colorsMap {
     .container__card-container__card-#{$name} {
-        background: radial-gradient(circle at 50% 0%, $value 65%, whitesmoke );
+        background: radial-gradient(circle at 50% 0%, $value 1%, white);
         padding: 5px 10px 10px;
         box-shadow: 0 2px 5px rgb(80, 78, 78);
         border-radius: 10px;

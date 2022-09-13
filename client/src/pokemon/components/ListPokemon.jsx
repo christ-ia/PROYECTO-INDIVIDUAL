@@ -1,25 +1,9 @@
-import React from 'react'
+
 import { PokemonCard } from './PokemonCard'
 
 import './cardsStyles.scss'
-import { getPokemonsPage1 } from '../helpers/getPokemonsPage1'
-import { useState } from 'react'
-import { useEffect } from 'react'
 
-
-
-export const ListPokemon = () => {
-
-  const [pokemons, setPokemons] = useState([])
-
-  const getPage = async()=>{
-    const arr=await getPokemonsPage1()
-    setPokemons(arr);
-  }
-
-  useEffect(() => {
-    getPage()
-  }, [])
+export const ListPokemon = ({pokemons}) => {
   
 
   return (

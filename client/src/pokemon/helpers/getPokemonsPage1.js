@@ -2,7 +2,7 @@
 
 export const getPokemonsPage1 = async() => {
 
-    const url = `https://pokeapi.co/api/v2/pokemon?limit=150`
+    const url = `https://pokeapi.co/api/v2/pokemon?limit=100`
     const res = await fetch(url);
     const {results} = await res.json()
 
@@ -19,7 +19,8 @@ export const getPokemonsPage1 = async() => {
                 img : img,
                 imgArt: img2,
                 types: datapoke.types,
-                stats: datapoke.stats
+                stats: datapoke.stats,
+                atk: datapoke.stats[1].base_stat,
             }})
     )  
     return data
