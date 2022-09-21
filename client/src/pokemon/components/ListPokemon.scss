@@ -21,14 +21,16 @@ $colorsMap: (
     rock: #2d3436,
     water: #0190FF,
     dark: darkgrey,
-    steel: grey
+    steel: grey,
+    unknown: rgba(65, 38, 38, 0.233),
+    shadow: rgba(65, 38, 38, 0.233)
 );
 
 
 .container{
     display: grid;
     grid-template-columns: 23.5% 23.5% 23.5% 23.5%;
-    width: 85%;
+    width: 80%;
     justify-content: space-between;
     margin: 0 auto;
 }
@@ -61,7 +63,8 @@ $colorsMap: (
 .container__card-container__card-head{
     display: grid;
     grid-template-columns: auto auto;
-    justify-content: space-between;
+    justify-content: space-around;
+    
 }
 .container__card-container__card-head-pokedex{
     width: 100px;
@@ -70,7 +73,6 @@ $colorsMap: (
     text-align: center;
     border-radius: 25px;
     padding: 5px 0;
-    margin-left: auto;
     
 }
 

@@ -10,8 +10,9 @@ export const RouterApp = () => {
     <NavBar />
     <Routes>
         <Route path='about' element = {<About />} />
-        <Route path='/*' element = {<Home />} />
-        <Route path='/pokemon/:pokeid' element = {<PokemonCardDetails />} />
+        <Route path='pokemons' element = {<Home />} />
+        <Route path='pokemon/:pokeid' element = {<PokemonCardDetails />} />
+        <Route path='/*' element={<Home />}/>
     </Routes>
     </>
   )

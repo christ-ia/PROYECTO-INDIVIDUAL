@@ -13,7 +13,7 @@ export const NavBar = () => {
             className={
                 ({isActive})=>`link${(isActive)?'-active':''}` 
             }
-            to = ''
+            to = 'pokemons'
             > Home </NavLink>
             <NavLink 
             className={

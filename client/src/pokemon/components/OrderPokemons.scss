@@ -1,14 +1,32 @@
 .container-orders{
     display: grid;
     grid-template-columns: auto auto auto auto auto;
-    justify-content:end;
-    width: 70%;
+    width: 100%;
+    align-items: center;
+    p{
+        margin-right: 0.5rem;
+        margin-left: 0.9rem;
+    }
 }
-.container-orders__btn-active{
-    background-color: green;
+.container-orders__asc-desc-buttons__btn-active{
+
+    box-shadow: 0 1px 2px rgb(80, 78, 78);
+    border: none;
+    background-color: #333;
+    font-size: 0.8rem;
+    font-weight: 800;
+    color: white;
     cursor: pointer;
 }
-.container-orders__btn{
-    background-color: whitesmoke;
+.container-orders__asc-desc-buttons__btn{
+    font-size: 0.6rem;
+    border: none;
+    background-color: rgb(248, 246, 246);
     cursor: pointer;
+}
+select{
+    margin-right: 0.5rem;
+}
+option:checked{
+    background-color:rgb(230, 227, 227) ;
 }

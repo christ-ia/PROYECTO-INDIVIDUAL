@@ -1,34 +1,52 @@
-
-import { ListPokemon, Search } from '../components/'
+import { ListPokemon, OrderPokemons } from '../components/'
+import { useEffect, useState } from 'react'
+import { useDispatch, useSelector, } from 'react-redux'
+import { initCharacters } from '../../reducers/actionsCreator'
+import { getTypes } from '../helpers';
 import './Home.scss'
-import { getPokemonsPage1 } from '../helpers/getPokemonsPage1'
-import { useState } from 'react'
-import { useEffect } from 'react'
-import { OrderPokemons } from '../components/OrderPokemons'
+import { filter } from '../helpers/filter';
+import { IsLoading } from '../components/IsLoading';
 
 export const Home = () => {
 
-  const [pokemons, setPokemons] = useState([])
+  const [currentPage, setCurrentPage] = useState(1);
+  const [types, setTypes] = useState([]);
+  const [type, setType] = useState('All');
+  const [order, setOrder] = useState(true);
+  const [key, setKey] = useState('id');
+  const dispatch = useDispatch();
+  const {pokemons, isLoading} = useSelector(state => state);
 
-  const getPage = async()=>{
-    const arr=await getPokemonsPage1()
-    setPokemons(arr);
-  }
+  const filteredPokemons = filter(type, currentPage, pokemons, order, key );
 
   useEffect(() => {
-    getPage()
-  }, [])
+    const getData = async()=>{
+      const arr = await getTypes();
+      setTypes(arr);
+    }
+    getData();
+  }, []);
+
+  useEffect(() => {
+    dispatch(initCharacters())
+  }, [dispatch]);
+
+
+  if (isLoading) return <IsLoading />
 
   return (
     <>
+
     <div className='container-head'>
-      <h2>Todos los pokemons</h2>
-      <Search pokemons = {pokemons} setPokemons = {setPokemons}/>  
+      <h2>Pokedex</h2>
+      {/* <Search />   */}
+      {/* <OrderPokemons types= {types}/> */}
     </div>
-      <hr />
-    <OrderPokemons pokemons={pokemons} setPokemons={setPokemons} />
+
     <hr />
-      <ListPokemon pokemons={pokemons}/>
+
+    <ListPokemon filteredPokemons={filteredPokemons} />
+
     </>
   )
 }

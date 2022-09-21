@@ -18,7 +18,7 @@ export const PokemonCardDetails = () => {
       }, [pokeid])
       
       const {name, id, imgArt} = pokemons;
-      console.log(pokemons.types)
+      //console.log(pokemons.types)
     return (
         <>
             <div className='container__card-container'>

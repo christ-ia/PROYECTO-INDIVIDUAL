@@ -11,7 +11,7 @@ export const PokemonCard = ({name, types, id, imgArt, atk}) => {
             >
                     <div className="container__card-container__card-head">
                         <p className='container__card-container__card-head-pokedex'>
-                            Pókedex  
+                            Nº:   
                             <span className="span-card">  {id}</span>
                         </p>
                         <p className='container__card-container__card-head-pokedex'>

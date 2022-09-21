@@ -1,16 +1,16 @@
 
 import { PokemonCard } from './PokemonCard'
 
-import './cardsStyles.scss'
+import './ListPokemon.scss'
 
-export const ListPokemon = ({pokemons}) => {
+export const ListPokemon = ({filteredPokemons}) => {
   
 
   return (
     <>
     <div className='container'>
       {
-        pokemons.map( el =>(
+        filteredPokemons.map( el =>(
           <PokemonCard key={el.id} atk={el.stats[1].base_stat} name = {el.name} types = {el.types} id = {el.id} imgArt = {el.imgArt} />
         ))
       }
