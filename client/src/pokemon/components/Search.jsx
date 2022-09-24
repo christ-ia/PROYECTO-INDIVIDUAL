@@ -1,33 +1,38 @@
-import { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import refreshLogo from '../assets/refresh.png'
+import { useSearch } from '../hooks/useSearch';
+import './Search.scss'
 
-export const Search = ({pokemons, setPokemons}) => {
-  
-  const [input, setInput] = useState('');
+export const Search = () => {
 
+  const dispatch = useDispatch();
 
-  const onChangeInput = (e)=>{
-    setInput(e.target.value)
-  }
-
-  const onSubmit = (e)=>{
-    e.preventDefault()
-    let searchPokemons = [...pokemons]
-    setPokemons( searchPokemons.filter(el => el.name === input) );
-  }
+  const{input, onChangeInput, handleSubmit, found } = useSearch()
 
   return (
-    <form 
-      onSubmit={onSubmit}
-    >
+    <div className='search-container'>
+    
+       <img 
+          src={refreshLogo} 
+          alt="refresh"
+          className='search-refresh-icon'
+          onClick={()=>dispatch({type:'GET_ALL_POKEMONS'})}
+       />
+      <form 
+        onSubmit={handleSubmit}
+        className='search-form'
+      >
 
-      <input 
-        type="text"
-        value={input}
-        onChange = {onChangeInput}
-        placeholder='Ingresa el nombre del pokemon'
-         />
-      <input type="submit" />
+        <input 
+          type="text"
+          value={input}
+          onChange = {onChangeInput}
+          placeholder='Search pokemon by name'
+          />
+        <input type="submit" />
 
-    </form>
+      </form>
+      {found && <h5 className= 'pokemon-not-found'>{`pokemon : ${input} not found!`}</h5>}
+    </div>
   )
 }

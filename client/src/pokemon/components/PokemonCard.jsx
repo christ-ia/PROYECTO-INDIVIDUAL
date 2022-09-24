@@ -24,11 +24,11 @@ export const PokemonCard = ({name, types, id, imgArt, atk}) => {
                         <img onError={e=>{e.target.src = logo}} src={imgArt} alt={name} />
                     </Link>
 
-                    <h2 className='container__card-container__card-name'>{name}</h2>
+                    <h2 className='container__card-container__card-name'>{name.replace(/^\w/, (c) => c.toUpperCase())}</h2>
 
                     <div className='container__card-container__card-types'>
                         {types.map(el=>(
-                            <span key={el.slot} className={`span-types-${el.type.name}`}> {el.type.name} </span>
+                            <span key={el.slot} className={`span-types-${el.type.name}`}> {el.type.name.replace(/^\w/, (c) => c.toUpperCase())} </span>
                         ))}
                     </div>
 

@@ -1,7 +1,8 @@
 const initialState = {
     pokemons: [],
+    allPokemons: [],
     isLoading: true,
-    page:1
+    // page:1
 }
 
 export const pokemonReducer = (state=initialState, action)=>{
@@ -15,6 +16,7 @@ export const pokemonReducer = (state=initialState, action)=>{
             return{
                 ...state,
                 pokemons: action.payload,
+                allPokemons: action.payload,
                 isLoading: false
             }
         
@@ -24,16 +26,35 @@ export const pokemonReducer = (state=initialState, action)=>{
                 error: action.payload,
                 isLoading: false
             }
-        case 'GET-POKEMONS':
-            return {...state}
-        case 'ORDER_POKEMONS':
-            const order = action.payload.order;
-            const key = action.payload.key;
-            if (order){
-                return {...state, pokemons: state.pokemons.sort((a,b) => (a[key] > b[key] ? 1 : a[key] < b[key] ? -1 : 0))};
+        
+        case 'GET_ALL_POKEMONS':
+            return{
+                ...state,
+                pokemons: state.allPokemons
             }
-            return {...state, pokemons: state.pokemons.sort((b,a) => (a[key] > b[key] ? 1 : a[key] < b[key] ? -1 : 0))};;
-         
+
+        case 'ORDER_POKEMONS_ASC':
+            const key = action.payload.key;
+            return {...state, pokemons: state.pokemons.sort((a,b) => (a[key] > b[key] ? 1 : a[key] < b[key] ? -1 : 0))};
+          
+        case 'ORDER_POKEMONS_DESC':
+            const keyDesc = action.payload.key;
+
+            return {...state, pokemons: state.pokemons.sort((b,a) => (a[keyDesc] > b[keyDesc] ? 1 : a[keyDesc] < b[keyDesc] ? -1 : 0))};;
+        
+
+        case 'FILTER_BY_TYPE':
+            return {
+                ...state,
+                pokemons: action.payload
+            }
+            
+        case 'FILTER_BY_NAME':
+            return{
+                ...state,
+                pokemons: action.payload
+            }
+
         default:
             return state;
     }

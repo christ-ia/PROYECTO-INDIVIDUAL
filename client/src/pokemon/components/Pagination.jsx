@@ -1,4 +1,6 @@
-import React from 'react'
+
+import './Pagination.scss'
+
 
 export const Pagination = ({ currentPage, setCurrentPage, totalPokemons }) => {
 	const totalPages = Math.ceil(totalPokemons / 12);
@@ -8,28 +10,33 @@ export const Pagination = ({ currentPage, setCurrentPage, totalPokemons }) => {
 	for (let p = 1; p <= totalPages; p++) {
 		pages.push(p);
 	}
+	//let pages5= pages.slice(currentPage-5, currentPage+5)
 
 	return (
-		<ul className="pagination">
-			<li className={`page-item ${currentPage === 1 && `disabled`}`}>
-				<button className="page-link" onClick={() => setCurrentPage(currentPage - 1)}>
-					&laquo;
-				</button>
-			</li>
-			{pages.map((page) => (
-				<li
-					key={page}
-					className={`page-item ${page === currentPage && `active`}`}
-					onClick={() => setCurrentPage(page)}
+		<div className='container-pagination'>
+			<ul className="pagination">
+				<li onClick={() => setCurrentPage(currentPage - 1)}
+					className={`li-${(currentPage ===1)?'disabled':''}`}
 				>
-					<button className="page-link">{page}</button>
+						&laquo;
 				</li>
-			))}
-			<li className={`page-item ${currentPage === totalPages && `disabled`}`}>
-				<button className="page-link" onClick={() => setCurrentPage(currentPage + 1)}>
-					&raquo;
-				</button>
-			</li>
-		</ul>
+
+				{pages.map((page) => (
+					<li
+						key={page}
+						onClick={() => setCurrentPage(page)}
+						className= {`li-${(currentPage===page)?'active':''}`}
+					>
+						{page}
+					</li>
+				))}
+
+				<li onClick={() => setCurrentPage(currentPage + 1)}
+					className={`li-${(currentPage === totalPages)?'disabled':''}`}
+				>
+						&raquo;
+				</li>
+			</ul>
+		</div>
 	);
 };
