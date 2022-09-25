@@ -1,8 +1,6 @@
 
 const fetch = require('node-fetch') 
 
-
-
 const getPokemonsApi = async() => {
 
     const url = `https://pokeapi.co/api/v2/pokemon?limit=40`

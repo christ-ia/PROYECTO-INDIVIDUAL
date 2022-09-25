@@ -5,9 +5,9 @@ const getAllPokemons = async ()=>{
     const api = await getPokemonsApi();
     const bd = await getPokemonsBd();
 
-    console.log(api.concat(bd))
+    //console.log(api.concat(bd))
 
-    //return api.concat(bd);
+    return api.concat(bd);
 
 }
 module.exports={

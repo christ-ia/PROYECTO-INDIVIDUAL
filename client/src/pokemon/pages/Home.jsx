@@ -16,7 +16,7 @@ export const Home = () => {
 	const indexOfFirstPokemon = indexOfLastPokemon - 12;
 	const pokemonsPage = pokemons.slice(indexOfFirstPokemon, indexOfLastPokemon);
   const dispatch = useDispatch();
-  const { isLoading } = useSelector(state => state);
+  const { isLoading, } = useSelector(state => state);
 
   useEffect(() => {
     dispatch(initCharacters())
