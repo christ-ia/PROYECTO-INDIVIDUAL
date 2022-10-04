@@ -1,3 +1,3 @@
 export const getPokemonTypes = (types)=>{
-    return types.map(el => el.type.name.toLowerCase())
+    return types.map(el => el.name.toLowerCase())
 }

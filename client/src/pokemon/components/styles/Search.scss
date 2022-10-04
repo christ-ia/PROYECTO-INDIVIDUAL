@@ -19,7 +19,8 @@
 .pokemon-not-found{
     animation: anim 1.6s;
     position: absolute;
-    top: 2.5rem;
-    right: 5rem;
+    background-color: #333;
+    top: 35px;
+    border-radius: 2px;
     color: white;
 }

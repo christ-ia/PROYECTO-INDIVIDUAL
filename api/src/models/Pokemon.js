@@ -19,6 +19,9 @@ module.exports = (sequelize) => {
     defense: {
       type: DataTypes.INTEGER,
     },
+    attack: {
+      type: DataTypes.INTEGER,
+    },
     speed: {
       type: DataTypes.INTEGER,
     },
@@ -27,6 +30,10 @@ module.exports = (sequelize) => {
     },
     weight: {
       type: DataTypes.INTEGER,
+    },
+    imgArt:{
+      type: DataTypes.STRING,
+      defaultValue: 'no-image'
     },
     userCreation:{
       type: DataTypes.BOOLEAN,

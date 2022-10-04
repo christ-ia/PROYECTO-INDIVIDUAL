@@ -1,10 +1,12 @@
 import { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
-import { filterByType, orderFunc } from "../../reducers/actionsCreator";
+import { useDispatch, useSelector } from "react-redux";
+import { orderFunc, pokeFilter } from "../reducers/actionsCreator";
 import { getTypes } from "../helpers";
 
 export const useOrder = (setCurrentPage)=>{
-    const dispatch = useDispatch();
+  
+  const dispatch = useDispatch();
+  const {filterType, show} = useSelector(state=>state)
 
   const [key, setKey] = useState('id');
   const [order, setOrder] = useState(true);
@@ -13,7 +15,7 @@ export const useOrder = (setCurrentPage)=>{
   useEffect(() => {
     const getData = async()=>{
       const arr = await getTypes();
-      setTypes(arr);
+      setTypes(['All'].concat(arr));
     }
     getData();
   }, []);
@@ -21,11 +23,15 @@ export const useOrder = (setCurrentPage)=>{
   const onChangeOrderKey = event => {
     dispatch(orderFunc(event.target.value, order));
     setKey(event.target.value);
-    setCurrentPage(1)
+    setCurrentPage(1);
   }
   const onChangeFilterType = event =>{
-    dispatch(filterByType(event.target.value))
-    setCurrentPage(1)
+    dispatch(pokeFilter(show, event.target.value));
+    setCurrentPage(1);
+  }
+  const onChangeUserCreation = event =>{
+    dispatch(pokeFilter(event.target.value, filterType));
+    setCurrentPage(1);
   }
 
   return {
@@ -36,7 +42,8 @@ export const useOrder = (setCurrentPage)=>{
     types,
     setTypes,
     onChangeFilterType,
-    onChangeOrderKey
+    onChangeOrderKey,
+    onChangeUserCreation
   }
 
 }

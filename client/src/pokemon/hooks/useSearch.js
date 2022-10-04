@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-
 export const useSearch = () => {
 
     const {allPokemons} = useSelector(state=>state)
@@ -9,6 +8,7 @@ export const useSearch = () => {
   
     const [input, setInput] = useState('');
     const [found, setFound] = useState(false);
+    const [message, setMessage] = useState('');
   
   
     const onChangeInput = (e)=>{
@@ -17,22 +17,24 @@ export const useSearch = () => {
   
     const handleSubmit = (e)=>{
       e.preventDefault()
-      const filterName = allPokemons.filter(pokemon => {
+        const filterName = allPokemons.filter(pokemon => {
         return pokemon.name.toLowerCase() === input.toLowerCase()
       })
   
       if (filterName.length) {dispatch({type:'FILTER_BY_NAME', payload:filterName }); setInput('');}
       else{
+        setMessage(input);
+        setInput('');
         setFound(true);
         setTimeout(()=>{
           setFound(false);
-          setInput('')
         }, 1500)
       }
     }
     
     return{
         input,
+        message,
         found,
         onChangeInput,
         handleSubmit

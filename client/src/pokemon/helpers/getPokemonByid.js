@@ -1,18 +1,9 @@
 export const getPokemonsbyid = async(pokeid) => {
 
-    const url = `https://pokeapi.co/api/v2/pokemon/${pokeid}/`
-    const res = await fetch(url);
-    const {name, types, id, stats} = await res.json()
-    const imgArt = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${pokeid}.png`
+    const res = await fetch(`http://localhost:3001/pokemons/${pokeid}/`);
+    const resp = await res.json()
+    const {id, name, defense, attack, hp, speed, height, weight, Types, imgArt} = resp[0];
 
-    const atk = stats[1].base_stat
-
-    return{
-        name,
-        types,
-        id,
-        imgArt,
-        atk
-    }
+    return {id, name, defense, attack, hp, speed, height, weight, Types, imgArt}
 
 }

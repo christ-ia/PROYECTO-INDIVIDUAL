@@ -1,0 +1,36 @@
+.nav-bar{
+  display: grid;
+  grid-template-columns: auto auto;
+  justify-content: space-between;
+  width: 100%;
+  background-color: #333;
+  justify-items: center;
+  padding: 12px 0;
+}
+.nav-bar__elements-container{
+  grid-column: span 2;
+  display: grid;
+  grid-template-columns: 60% 40%;
+  align-items: center;
+  justify-content: space-between;
+  width: 80%;
+}
+
+.nav-bar-links{
+    display: flex;
+    align-items: center;
+}
+.link{
+  color: rgb(156, 141, 141);
+  text-decoration: none;
+  margin-right: 1rem;
+}
+.link-active{
+  color: whitesmoke;
+  text-decoration: none;
+  margin-right: 1rem;
+}
+.nav-bar__logo{
+  width: 120px;
+  margin: 5px 40px ;
+}

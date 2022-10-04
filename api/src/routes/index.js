@@ -43,22 +43,15 @@ router.get('/pokemons/:id', async(req, res)=>{
 
 router.post('/pokemons', async ( req, res )=>{
 
-    const { name, hp, defense, speed, height, weight, types } = req.body;
+    const { name, hp, defense, speed, height, weight, Types, attack } = req.body;
 
-    const verif = await Pokemon.findAll( { where: {name: name} })
-
-    console.log(verif)
-    if (verif.length){
-        res.status(400).send(`pokemon con el nombre ${name} ya existe`);
-        return;
-    }
     
-    const newPokemon = await Pokemon.create({ name, hp, defense, speed, height, weight });
+    const newPokemon = await Pokemon.create({ name, hp, defense, speed, height, weight, attack });
 
     const typesDb = await Type.findAll({
         where: {
             name: {
-                [Op.or]: types
+                [Op.or]: Types
             }
         }
     } )

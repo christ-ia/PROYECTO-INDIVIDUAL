@@ -1,5 +1,5 @@
 
-import './Pagination.scss'
+import './styles/Pagination.scss'
 
 
 export const Pagination = ({ currentPage, setCurrentPage, totalPokemons }) => {
@@ -10,7 +10,6 @@ export const Pagination = ({ currentPage, setCurrentPage, totalPokemons }) => {
 	for (let p = 1; p <= totalPages; p++) {
 		pages.push(p);
 	}
-	//let pages5= pages.slice(currentPage-5, currentPage+5)
 
 	return (
 		<div className='container-pagination'>

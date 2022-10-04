@@ -1,6 +1,6 @@
 
-import { PokemonCard } from './PokemonCard'
-import './ListPokemon.scss'
+import { PokemonCard } from './PokemonCard';
+import './styles/ListPokemon.scss';
 
 export const ListPokemon = ({pokemonsPage}) => {
   
@@ -9,7 +9,7 @@ export const ListPokemon = ({pokemonsPage}) => {
     <div className='container'>
       {
         pokemonsPage.map( el =>(
-          <PokemonCard key={el.id} atk={el.stats[1].base_stat} name = {el.name} types = {el.types} id = {el.id} imgArt = {el.imgArt} />
+          <PokemonCard key={el.id} attack={el.attack} name = {el.name} types = {el.Types} id = {el.id} imgArt = {el.imgArt} />
         ))
       }
     </div>

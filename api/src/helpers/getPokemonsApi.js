@@ -13,19 +13,20 @@ const getPokemonsApi = async() => {
             const datapoke = await respoke.json()
             const img = `http://play.pokemonshowdown.com/sprites/xyani/${el.name}.gif`
             const img2 = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${datapoke.id}.png`;
+            const Types = datapoke.types.map( el => ({name: el.type.name.replace(/^\w/, (c) => c.toUpperCase())}) )
             return {   
                 name: el.name,
                 url : el.url,
                 id : datapoke.id,
                 img : img,
                 imgArt: img2,
-                types: datapoke.types,
+                Types,
                 stats: datapoke.stats,
-                height: el.height,
-                weight: el.weight,
+                height: datapoke.height,
+                weight: datapoke.weight,
                 hp: datapoke.stats[0].base_stat,
-                atk: datapoke.stats[1].base_stat,
-                def: datapoke.stats[2].base_stat,
+                attack: datapoke.stats[1].base_stat,
+                defense: datapoke.stats[2].base_stat,
                 speed: datapoke.stats[3].base_stat,
             }})
     )  

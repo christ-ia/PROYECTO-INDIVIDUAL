@@ -1,6 +1,7 @@
 .container-pagination{
     display: flex;
     justify-content: center;
+    user-select: none;
 }
 .pagination {
 display: inline;

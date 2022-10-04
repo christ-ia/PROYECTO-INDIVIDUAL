@@ -2,28 +2,27 @@
     font-family: "Poppins", sans-serif;
 }
 
-
 $colorsMap: (
-    bug: #26de81,
-    dragon: rgb(180, 43, 107),
-    electric: #fed330,
-    fairy: #FF0069,
-    fighting: #30336b,
-    fire: #f0932b,
-    flying: #43c5c5,
-    grass: #00b894,
-    ground: #EFB549,
-    ghost: #a55eea,
-    ice: #74b9ff,
-    normal: #95afc0,
-    poison: #6c5ce7,
-    psychic: #a29bfe,
-    rock: #2d3436,
-    water: #0190FF,
-    dark: darkgrey,
-    steel: grey,
-    unknown: rgba(65, 38, 38, 0.233),
-    shadow: rgba(65, 38, 38, 0.233)
+    Bug: #26de81,
+    Dragon: rgb(180, 43, 107),
+    Electric: #fed330,
+    Fairy: #FF0069,
+    Fighting: #30336b,
+    Fire: #f0932b,
+    Flying: #43c5c5,
+    Grass: #00b894,
+    Ground: #EFB549,
+    Ghost: #a55eea,
+    Ice: #74b9ff,
+    Normal: #95afc0,
+    Poison: #6c5ce7,
+    Psychic: #a29bfe,
+    Rock: #2d3436,
+    Water: #0190FF,
+    Dark: darkgrey,
+    Steel: grey,
+    Unknown: rgba(65, 38, 38, 0.233),
+    Shadow: rgba(65, 38, 38, 0.233)
 );
 
 
@@ -32,23 +31,24 @@ $colorsMap: (
     grid-template-columns: 23.5% 23.5% 23.5% 23.5%;
     width: 80%;
     justify-content: space-between;
+    gap: 18px;
     margin: 0 auto;
+    user-select: none;
 }
 
 .container__card-container{
     width: 100%;
     transform: translate(50% 50%);
-    margin-bottom: 20px;
-}
-.container__card-container:hover{
-    transform: translateY(-6px);
+    &:hover{
+        transform: translateY(-6px);
+    }
 }
 
 @each $name, $value in $colorsMap {
-    .container__card-container__card-#{$name} {
+    .card-container-#{$name} {
         background: radial-gradient(circle at 50% 0%, $value 1%, white);
         padding: 5px 10px 10px;
-        box-shadow: 0 2px 5px rgb(80, 78, 78);
+        box-shadow: 0 2px 5px rgb(163, 163, 163 );
         border-radius: 10px;
         img{
             display: block;
@@ -60,29 +60,28 @@ $colorsMap: (
         }
     }
 }
-.container__card-container__card-head{
+.card-container__card-head{
     display: grid;
     grid-template-columns: auto auto;
     justify-content: space-around;
-    
-}
-.container__card-container__card-head-pokedex{
-    width: 100px;
-    background-color: #fff;
-    font-size: 0.65rem;
-    text-align: center;
-    border-radius: 25px;
-    padding: 5px 0;
-    
+    .card-head__etiqueta{
+        width: 100px;
+        background-color: #fff;
+        font-size: 0.65rem;
+        text-align: center;
+        border-radius: 25px;
+        padding: 5px 0;
+        
+    }
 }
 
-.container__card-container__card-name{
+.card-container__card-name{
     text-align: center;
     font-size: 1.7rem;
     font-weight: 600;
     margin: 0;
 }
-.container__card-container__card-types{
+.card-container__card-types{
     display: flex;
     justify-content: space-around;
     margin: 7%;

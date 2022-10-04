@@ -1,34 +1,40 @@
-import { Link } from "react-router-dom";
-import logo from '../assets/whoIs.png'
+import {  NavLink } from "react-router-dom";
+import logo from '../assets/whoIs.png';
 
-export const PokemonCard = ({name, types, id, imgArt, atk}) => {
-
+export const PokemonCard = ({name, types, id, imgArt = logo, attack}) => {
+    
   return (
     <>
         <div className='container__card-container'>
 
-            <div className={`container__card-container__card-${types[0].type.name}`}
-            >
-                    <div className="container__card-container__card-head">
-                        <p className='container__card-container__card-head-pokedex'>
-                            Nº:   
-                            <span className="span-card">  {id}</span>
-                        </p>
-                        <p className='container__card-container__card-head-pokedex'>
+            <div className={`card-container-${types[0].name}`}>
+                    <div className="card-container__card-head">
+                       { 
+                            (typeof(id) === 'number')
+                            ? <>
+                                <p className='card-head__etiqueta'>
+                                    Nº:   
+                                    <span className="span-card">  {id}</span>
+                                </p>
+                              </>
+                            : <p className="card-head__etiqueta">not-official</p>
+                        }
+
+                        <p className='card-head__etiqueta'>
                             ATK   
-                            <span className="span-card">  {atk}</span>
+                            <span className="span-card">  {attack}</span>
                         </p>
                     
                     </div>
-                    <Link to={`/pokemon/${id}`}>
+                    <NavLink to={`${id}`}>
                         <img onError={e=>{e.target.src = logo}} src={imgArt} alt={name} />
-                    </Link>
+                    </NavLink>
 
-                    <h2 className='container__card-container__card-name'>{name.replace(/^\w/, (c) => c.toUpperCase())}</h2>
+                    <h2 className='card-container__card-name'>{name.replace(/^\w/, (c) => c.toUpperCase())}</h2>
 
-                    <div className='container__card-container__card-types'>
-                        {types.map(el=>(
-                            <span key={el.slot} className={`span-types-${el.type.name}`}> {el.type.name.replace(/^\w/, (c) => c.toUpperCase())} </span>
+                    <div className='card-container__card-types'>
+                        {types.map( (el,i) =>(
+                            <span key={i} className={`span-types-${el.name}`}> {el.name} </span>
                         ))}
                     </div>
 
