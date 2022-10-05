@@ -3,6 +3,7 @@ const initialState = {
     pokemons: [],
     allPokemons: [],
     isLoading: true,
+    error:null,
     filterType: 'All',
     show: 'All'
 }
@@ -27,6 +28,7 @@ export const pokemonReducer = (state=initialState, action)=>{
             return{
                 ...state,
                 error: action.payload,
+                pokemons:[],
                 isLoading: false
             }
         
@@ -34,6 +36,11 @@ export const pokemonReducer = (state=initialState, action)=>{
             return{
                 ...state,
                 pokemons: state.allPokemons
+            }
+        case 'SET_ERROR':
+            return{
+                ...state,
+                error: action.payload
             }
 
         case 'ORDER_POKEMONS_ASC':

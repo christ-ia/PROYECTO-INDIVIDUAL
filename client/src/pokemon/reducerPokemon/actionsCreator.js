@@ -40,8 +40,8 @@ export const orderFunc = (key, order)=>{
 }
 
 export const pokeFilter = (value, type) => (dispath, getState)=>{
-    
-    const {allPokemons} = getState();
+
+    const {allPokemons} = getState().pokemonReducer;
     let filteredPokemon = [];
     
     if (value=== 'All') {

@@ -2,15 +2,18 @@
     display: flex;
     height: 100vh;
     justify-content: center;
+    // background-image: url('../../assets/landingPage.png');
+    // background-size: cover;
+    img{width: 100%;}
     .landing-page__button{
         position: absolute;
-        left: 20px;
-        top: 20px;
+        left: 40%;
+        bottom: 20%;
         width: 300px;
         font-size: 20px;
         line-height: 80px;
-        background: #333;
-        color: #fff;
+        background: #fff;
+        color: #333;
         font-weight: bold;
         border: none;
         border-radius: 3px;

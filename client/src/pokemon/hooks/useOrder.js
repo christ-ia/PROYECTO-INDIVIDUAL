@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { orderFunc, pokeFilter } from "../reducers/actionsCreator";
+import { orderFunc, pokeFilter } from "../reducerPokemon/actionsCreator";
 import { getTypes } from "../helpers";
 
 export const useOrder = (setCurrentPage)=>{
   
   const dispatch = useDispatch();
-  const {filterType, show} = useSelector(state=>state)
+  const {filterType, show} = useSelector(state=>state.pokemonReducer)
 
   const [key, setKey] = useState('id');
   const [order, setOrder] = useState(true);

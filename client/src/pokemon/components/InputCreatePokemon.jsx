@@ -1,23 +1,27 @@
 import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
-export const InputCreatePokemon = ({inputState, setInputState, label, placeholder, type, errMessage, condition, isUnique}) => {
+export const InputCreatePokemon = ({name, label, placeholder, type, errMessage, condition, isUnique}) => {
   
+  const dispatch = useDispatch();
   const [message, setMessage] = useState(errMessage);
+  
+  const inputState = useSelector(state=> state.formReducer[name])
 
   const handleChange = event=>{
-    setInputState({...inputState, value: event.target.value})
+    dispatch({type:'SET_INPUT_VALUE', payload:{name, value: event.target.value}})
   };
  
   const verif = () => {
     if(condition){
       condition.test(inputState.value)
-              ? setInputState({...inputState, isValid: true})
-              : setInputState({...inputState, isValid: false})
+              ?dispatch({type: 'SET_INPUT_VALID', payload:{name, isValid: true }})
+              :dispatch({type: 'SET_INPUT_VALID', payload:{name, isValid: false }})
     }
     if(isUnique){
       const value = isUnique.filter( el => el.name.toLowerCase() === inputState.value.toLowerCase());
       if(value.length){
-        setInputState({...inputState, isValid:false})
+        dispatch({type: 'SET_INPUT_VALID', payload:{name, isValid: false }})
         setMessage('This pokemon name already exist.')
       }else{
         setMessage(errMessage)

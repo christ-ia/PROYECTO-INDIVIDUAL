@@ -1,35 +1,15 @@
-import { useState, useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
 import { InputCreatePokemon } from '../components/InputCreatePokemon';
 import Logo from '../assets/whoIs.png'
 import './styles/CreatePokemon.scss';
-import { initCharacters } from '../reducers/actionsCreator'
 import { CheckBoxCreatePokemon } from '../components/CheckBoxCreatePokemon';
-import { useNavigate } from 'react-router-dom';
+import { useCreatePokemon } from '../hooks/useCreatePokemon';
+import { useSelector } from 'react-redux';
 
 
 export const CreatePokemon = () => {
 
-  const dispatch = useDispatch();
-  const navigate = useNavigate()
-  
-  const [name, setName] = useState({value: '', isValid: null});
-  const [weight, setWeight] = useState({value: '', isValid: null});
-  const [height, setHeight] = useState({value: '', isValid: null});
-  const [hp, setHp] = useState({value: '', isValid: null});
-  const [attack, setAttack] = useState({value: '', isValid: null});
-  const [defense, setDefense] = useState({value: '', isValid: null});
-  const [speed, setSpeed] = useState({value: '', isValid: null});
-  const [type, setType] = useState([]);
-  const [validCheckBox, setValidCheckBox] = useState(null)
-  const [validForm, setValidForm] = useState(null);
-  
-  const {allPokemons,} = useSelector(state=>state);
-
-  useEffect(() => {
-    dispatch(initCharacters())
-  }, [dispatch]);
-
+  const {allPokemons} = useSelector(state => state.pokemonReducer);
+  const {handleSubmit, Types, validCheckBox, validForm} = useCreatePokemon();
 
   const conditions ={
     name: /^[a-zA-Z0-9_-]{4,20}$/,
@@ -41,78 +21,12 @@ export const CreatePokemon = () => {
     speed: /^([1-9]|[1-9]\d|[1]\d\d|200)$/,
   }
 
-
-  const handleSubmit = async e=>{
-    e.preventDefault();
-    
-    if (
-        name.isValid &&
-        weight.isValid &&
-        height.isValid &&
-        attack.isValid &&
-        defense.isValid &&
-        speed.isValid &&
-        validCheckBox
-        ){
-
-          const form = {
-            name: name.value,
-            weight: weight.value,
-            hp:hp.value,
-            height: height.value,
-            attack: attack.value,
-            defense: defense.value,
-            speed: speed.value,
-            Types: type
-          }
-          
-          try {
-            let config = {
-              method: 'POST',
-              headers: { 'Content-Type': 'application/json' },
-              body: JSON.stringify(form)
-            }
-            console.log(config)
-            let res = await fetch('http://localhost:3001/pokemons/', config);
-            let resp = await res.json();
-            console.log(resp)
-          } catch (error) {
-             console.error(error)
-          }
-
-          setName({value: '', isValid: null});
-          setWeight({value: '', isValid: null});
-          setHeight({value: '', isValid: null});
-          setHp({value: '', isValid: null});
-          setAttack({value: '', isValid: null});
-          setDefense({value: '', isValid: null});
-          setSpeed({value: '', isValid: null});
-          setValidCheckBox(null)
-          setType([])
-          setTimeout(() => {
-            navigate('/pokedex')
-          }, 1500);
-
-        }else{
-          if(name.isValid === null) {setName( {...name, isValid: false} ); setValidForm(false)}; 
-          if (weight.isValid === null) {setWeight( {...weight, isValid: false} ); setValidForm(false)}; 
-          if (height.isValid === null) {setHeight( {...height, isValid: false} ); setValidForm(false)}; 
-          if (hp.isValid === null) {setHp( {...hp, isValid: false} ); setValidForm(false)};
-          if (attack.isValid === null) {setAttack( {...attack, isValid: false} ); setValidForm(false)}; 
-          if (defense.isValid === null) {setDefense( {...defense, isValid: false} ); setValidForm(false)}; 
-          if (speed.isValid === null) {setSpeed( {...speed, isValid: false} ); setValidForm(false)}; 
-        }
-
-
-  }
-
-
   return (
     <div className='create-pokemon__container'>
         <div className='create-pokemon__card-container'>
           <img src={Logo} alt="logo" /> 
           <div className='card-container__card-types'>
-              {type.map( (el,i) =>(
+              {Types.map( (el,i) =>(
                   <span key={i} className={`span-types-${el}`}> {el} </span>
               ))}
           </div>
@@ -123,19 +37,14 @@ export const CreatePokemon = () => {
                 (validCheckBox === false)?'-enabled':''
               }`
             }>you must mark one or two types of pokemon</p>
-          <CheckBoxCreatePokemon 
-            newPokemonType={type} 
-            setNewPokemonType={setType}
-            validate = {setValidCheckBox}
-          />
+          <CheckBoxCreatePokemon />
         </div>
 
         <form className='create-pokemon__form' id='create-form' >
 
             <InputCreatePokemon 
                 label="Name" 
-                inputState = {name}
-                setInputState = {setName}
+                name = "name"
                 placeholder= "Pikachu" 
                 type="text" 
                 errMessage="Name must be between 4 and 20 characters, only letters, hyphen, underscore. No spaces"
@@ -144,8 +53,7 @@ export const CreatePokemon = () => {
             />
             <InputCreatePokemon 
                 label="Weight" 
-                inputState = {weight}
-                setInputState = {setWeight}
+                name = "weight"
                 placeholder= "60" 
                 type="number" 
                 errMessage="Weigth must be between 1 and 1000"
@@ -153,8 +61,7 @@ export const CreatePokemon = () => {
             />
             <InputCreatePokemon 
                 label="Height" 
-                inputState = {height}
-                setInputState = {setHeight}
+                name = "height"
                 placeholder= "4" 
                 type="number" 
                 errMessage="Height must be between 1 and 20"
@@ -162,8 +69,7 @@ export const CreatePokemon = () => {
             />
             <InputCreatePokemon 
                 label="HP" 
-                inputState = {hp}
-                setInputState = {setHp}
+                name="hp"
                 placeholder= "35" 
                 type="number" 
                 errMessage="HP must be between 1 and 500"
@@ -171,8 +77,7 @@ export const CreatePokemon = () => {
             />
             <InputCreatePokemon 
                 label="Attack" 
-                inputState = {attack}
-                setInputState = {setAttack}
+                name="attack"
                 placeholder= "55" 
                 type="number" 
                 errMessage="Attack must be between 1 and 190"
@@ -180,8 +85,7 @@ export const CreatePokemon = () => {
             />
             <InputCreatePokemon 
                 label="Defense" 
-                inputState = {defense}
-                setInputState = {setDefense}
+                name="defense"
                 placeholder= "40" 
                 type="number" 
                 errMessage="Defense must be between 1 and 230"
@@ -189,8 +93,7 @@ export const CreatePokemon = () => {
             />
             <InputCreatePokemon 
                 label="Speed" 
-                inputState = {speed}
-                setInputState = {setSpeed}
+                name="speed"
                 placeholder= "50" 
                 type="number" 
                 errMessage="Speed must be between 1 and 200"
@@ -208,8 +111,6 @@ export const CreatePokemon = () => {
                 type='submit'
                 onClick={handleSubmit}
                 form='create-form'
-                disabled ={!validForm}
-                onc
                 >Create</button>
             </div>
         

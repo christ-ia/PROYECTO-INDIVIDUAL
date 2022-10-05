@@ -19,9 +19,9 @@ router.get('/pokemons', async( req, res )=>{
     const allPokemons = await getAllPokemons();
     if(name){
         const pokemon = allPokemons.filter( el =>el.name.toLowerCase() === name.toLocaleLowerCase());
-        pokemon.length
+        pokemon.length > 0
             ?res.send(pokemon)
-            :res.status(404).send('Personaje no encontrado')
+            :res.status(404).send({msg:"Personaje no encontrado"})
         return;
     }
 
@@ -46,7 +46,7 @@ router.post('/pokemons', async ( req, res )=>{
     const { name, hp, defense, speed, height, weight, Types, attack } = req.body;
 
     
-    const newPokemon = await Pokemon.create({ name, hp, defense, speed, height, weight, attack });
+    const newPokemon = await Pokemon.create({ name:name.replace(/^\w/, (c) => c.toLocaleLowerCase()), hp, defense, speed, height, weight, attack });
 
     const typesDb = await Type.findAll({
         where: {

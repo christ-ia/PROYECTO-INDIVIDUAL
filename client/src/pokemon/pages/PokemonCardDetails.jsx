@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useParams, useSearchParams } from "react-router-dom";
+import { useNavigate, useParams, } from "react-router-dom";
 
 import logo from '../assets/whoIs.png';
 import { getPokemonsbyid } from "../helpers";
@@ -11,21 +11,27 @@ export const PokemonCardDetails = () => {
 
     const [poke, setPoke] = useState({});
     const dispatch = useDispatch();
-    const {isLoading} = useSelector(state=>state)
+    const {isLoading} = useSelector(state=>state.pokemonReducer)
 
     const {pokeid} = useParams();
-    
+    const navigate = useNavigate()
+
     useEffect(() => {
         const getPokemon = async()=>{
             dispatch({type:'SET_ISLOADING_TRUE'})
-            const pokemon = await getPokemonsbyid(pokeid);
-            dispatch({type:'SET_ISLOADING_FALSE'})
-            setPoke(pokemon)
+            try {
+                const pokemon = await getPokemonsbyid(pokeid);
+                dispatch({type:'SET_ISLOADING_FALSE'})
+                setPoke(pokemon)
+            } catch (error) {
+                navigate('/notfound')
+            }
         }
         getPokemon()
-    }, [pokeid, dispatch])
+    }, [pokeid, dispatch, navigate])
     
-    if (isLoading) return <IsLoading />
+    if (isLoading) return <IsLoading to="/notfound"/>;
+    
 
     const {id, name, defense, attack, hp, speed, height, weight, Types} = poke;
     let {imgArt} = poke;

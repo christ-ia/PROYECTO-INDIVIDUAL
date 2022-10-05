@@ -1,6 +1,7 @@
 
 import { NavLink, useParams } from "react-router-dom";
 
+
 import logo from '../assets/pokeinfo.png'
 
 import './styles/NavBarStyles.scss'
@@ -10,7 +11,10 @@ export const NavBar = () => {
   const params = useParams()
   
   return (
+    <>
+
         <nav className='nav-bar'>
+
           <div className="nav-bar__elements-container">
 
             <div className='nav-bar-links'>
@@ -46,5 +50,6 @@ export const NavBar = () => {
             </div>
           </div>
       </nav>
+    </>
   )
 }

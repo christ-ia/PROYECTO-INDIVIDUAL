@@ -25,15 +25,23 @@ $colorsMap: (
     Shadow: rgba(65, 38, 38, 0.233)
 );
 
-
 .container{
     display: grid;
+    grid-template-columns: 12% 76% 12%;
+    justify-content: space-around;
+    gap: 18px;
+    margin: 0 auto;
+    z-index: 20;
+}
+.container-cards{
+    grid-column:2;
+    display: grid;
     grid-template-columns: 23.5% 23.5% 23.5% 23.5%;
-    width: 80%;
+    user-select: none;
+    width: 100%;
     justify-content: space-between;
     gap: 18px;
     margin: 0 auto;
-    user-select: none;
 }
 
 .container__card-container{

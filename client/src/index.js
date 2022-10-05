@@ -7,14 +7,14 @@ import './index.css';
 import { Provider } from 'react-redux'
 import { pokemonStore } from './pokemonStore';
 
-
-
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <Provider store = {pokemonStore}>
+
         <BrowserRouter>
           <RouterApp />
         </BrowserRouter>
+
     </Provider>
   </React.StrictMode>
 );

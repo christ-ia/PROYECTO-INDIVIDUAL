@@ -1,16 +1,17 @@
 .search-container{
-    display: grid;
-    grid-template-columns: auto auto 
+    justify-content: flex-end;
+    display: flex;
+
 }
 .search-form{
     margin: 0 0.4rem;
-    
+
 }
 .search-refresh-icon{
     cursor: pointer;
 }
 @keyframes anim{
-    0%{color: rgb(255, 255, 255);} 
+    0%{color: rgb(255, 255, 255);}
     60%{color: rgb(236, 235, 235);}
     70%{color: rgb(156, 154, 154);}
     90%{color: rgb(66, 65, 65);}

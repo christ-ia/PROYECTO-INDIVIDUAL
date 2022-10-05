@@ -1,7 +1,7 @@
 import { useDispatch } from "react-redux";
 
 import { useOrder } from "../hooks/useOrder";
-import { orderFunc } from "../reducers/actionsCreator";
+import { orderFunc } from "../reducerPokemon/actionsCreator";
 
 
 import './styles/OrderPokemons.scss';

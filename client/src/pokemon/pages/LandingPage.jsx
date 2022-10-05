@@ -1,5 +1,5 @@
 import {NavLink} from 'react-router-dom'
-import logo from '../assets/landingPage.webp'
+import logo from '../assets/landingPage.png'
 import './styles/LandingPage.scss'
 
 export const LandingPage = () => {
